@@ -14,7 +14,9 @@ Elle vous permettra simplement d’avoir sous vos yeux votre liste de chansons, 
 Si vous utilisez des piste instrumentales, vous pourrez également les embarquer dans l’application, vous en controlerez le lancement et le volume.
 
 Cette application des développée sous Qt 5.5.1 .
+
 Le module pdfCore sous iOS est basé sur le projet vfr de Julius Oklamcak : https://github.com/vfr/Viewer.
+
 Le module pdf Android est basé sur MuPdf : http://mupdf.com/
 
 
