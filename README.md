@@ -19,5 +19,6 @@ Le module pdfCore sous iOS est basé sur le projet vfr de Julius Oklamcak : http
 
 Le module pdf Android est basé sur MuPdf : http://mupdf.com/
 
+# Installation
 
-
+Clonez le repo, ouvrez le fichier GigSetlistPlayer.pro dans Qt Creator, choississez les platformes cibles, compilez.
