@@ -1,5 +1,5 @@
 # GigSetListPlayer
-Application Android et iOS pour les musiciens, permettant de créer des setlist de concerts.
+Application Android, iOS, MacOsx, Windows pour les musiciens, permettant de créer des setlists de concerts.
 
 Pourquoi un telle application ?
 
@@ -7,7 +7,7 @@ Vous êtes un musicienne, musicien, chanteuse, chanteur et lors de vos prestatio
 
 Alors cette application est faite pour vous !
 
-Elle remplacera votre encombrant et assez disgracieux classeur sur scène !
+Elle remplacera votre encombrant classeur sur scène !
 
 Elle vous permettra simplement d’avoir sous vos yeux votre liste de chansons, les paroles,les grilles d’accords et les partitions.
 
@@ -15,7 +15,7 @@ Si vous utilisez des piste instrumentales, vous pourrez également les embarquer
 
 # Environnement de développement
 
-Cette application des développée sous Qt 5.5.1 .
+Cette application est développée sous Qt 5.5.1 .
 
 Le module pdfCore sous iOS est basé sur le projet vfr de Julius Oklamcak : https://github.com/vfr/Viewer.
 
