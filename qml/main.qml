@@ -909,7 +909,7 @@ Rectangle{
                   qsTr('<b>Author : J.Y Priou</b><br>
                   <b>WebSite: <a href="http://www.monasysinfo.com" title="MonasysInfo">Monasysinfo.com</a></b><br>
                   <b>Online Help <a href="http://www.monasysinfo.com/documentation/en/" title="Online Help">Online Help</a></b><br>
-                  <b>Mail: <a href="mailto:support@monasysinfo.com">support@monasysinfo.com</a></b><br>                  <
+                  <b>Mail: <a href="mailto:yourmail@yourmail.com">yourmail@yourmail.com</a></b><br>                  <
                   <br>
                   <b>Fonts from : <a href="http://openfontlibrary.org">openfontlibrary.org</a><b>
                   <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> <br>
