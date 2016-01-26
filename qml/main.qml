@@ -137,7 +137,7 @@ Rectangle{
     /*====================================
       Remote Command COnfiguration
     ======================================*/
-    // Enables the use of a remote command (InApp purchase dependent)    
+    // Enables the use of a remote command (InApp purchase dependent)
     property bool remoteEnabled : true  //default true
     property bool remotePluged : false  //default false
     property string remodeMode : "UD"  //Modes are LR (Left - Right Keys) or UD (default) (up - Down Keys)
@@ -173,7 +173,7 @@ Rectangle{
     property alias scrollOrPageMode: scrollOrPageMode
     property alias lyricsEdit: lyricsEdit
     property alias help : help
-    property alias lyricsSave:lyricsSave    
+    property alias lyricsSave:lyricsSave
     property alias controls: controls
     property alias scrollSpeedCtl:scrollSpeedCtl
     property alias controlAutomation:controlAutomation
@@ -201,7 +201,7 @@ Rectangle{
     property real lyricsLineCount: 0
     property real lyricsTextY : 0
     property real lyricsScrollGapY: 0
-    property bool automationRecord:false    
+    property bool automationRecord:false
     property alias controlshow: controls.showhide
     property alias controlswidth: controls.width
     property bool lyricsEdition : false
@@ -292,12 +292,12 @@ Rectangle{
         currentLyricsFontColour = fontsAndColourSettings.settingLyricsFontColour != "" ? fontsAndColourSettings.settingLyricsFontColour : defaultFontColour
         currentLyricsFont = fontsAndColourSettings.settingLyricsFont != "" ? fontsAndColourSettings.settingLyricsFont : defaultLyricsFont
         currentFontColour = fontsAndColourSettings.settingFontColour != "" ? fontsAndColourSettings.settingFontColour : defaultFontColour
-        currentListFont = fontsAndColourSettings.settingListFont != "" ? fontsAndColourSettings.settingListFont : defaultListFont        
+        currentListFont = fontsAndColourSettings.settingListFont != "" ? fontsAndColourSettings.settingListFont : defaultListFont
         remoteEnabled = true
         remotePluged = remoteControlSettings.settingsRemotePluged && !liteMode
         pageMode = pagemodeSetting.pagemodeSet
         scrollVariation = pagemodeSetting.scrollInc
-        PlTools.fmain()        
+        PlTools.fmain()
     }
 
     /*================================
@@ -343,7 +343,7 @@ Rectangle{
     MediaPlayer{
         id:audioPlayer
         source: ""
-        property bool manualStop: false        
+        property bool manualStop: false
         volume:volumeSlider.value
         onStopped: {
             PlTools.endTuneAction()
@@ -356,7 +356,7 @@ Rectangle{
     MediaPlayer{
         id:metronome1
         source: "file://"+setlistDir+"audio/01.mp3"
-        volume:1.0        
+        volume:1.0
     }
     MediaPlayer{
         id:metronome2
@@ -483,7 +483,7 @@ Rectangle{
         width: root.width
         height: root.height - toolsControl.height
         color:currentBackGroundColour
-        anchors.left: root.left        
+        anchors.left: root.left
         SwipeView {
             id:swipeView
             anchors.fill: parent
@@ -493,7 +493,7 @@ Rectangle{
                     source: "playlistPlayer.qml"
                 }
                 ListElement {
-                    title: qsTr("Lyrics")                    
+                    title: qsTr("Lyrics")
                     source: "Lyrics.qml"
                 }
           }
@@ -514,7 +514,7 @@ Rectangle{
         anchors.bottomMargin: fontsizeLess.height + root.hunit*0.4
         //y:parent.height-scrollSpeedCtl.height
         width:root.hwratio < 1 ? root.hunit : root.vunit
-        height:root.hwratio < 1 ? root.hunit*3 : root.vunit*3        
+        height:root.hwratio < 1 ? root.hunit*3 : root.vunit*3
     }
 
     /********************************
@@ -571,7 +571,7 @@ Rectangle{
 
             width: root.hunit * 1.5
             height: root.vunit * 1.5
-            anchors.top:controls.top           
+            anchors.top:controls.top
             anchors.topMargin: root.hwratio > 1 ? root.hunit*0.5 : root.vunit*0.5
             anchors.horizontalCenter: controls.horizontalCenter
             color: currentBackGroundColour
@@ -581,7 +581,7 @@ Rectangle{
             property bool isplaying:false
             property alias imagePlay:imagePlay
             property alias mousePlay:mousePlay
-            Component.onCompleted: root.butPlay=butPlay            
+            Component.onCompleted: root.butPlay=butPlay
 
             Image  {
                 id: imagePlay
@@ -589,7 +589,7 @@ Rectangle{
                 anchors.fill: parent
                 anchors.centerIn: parent
                 opacity: 1
-                Behavior on opacity {NumberAnimation {duration: 100}}                
+                Behavior on opacity {NumberAnimation {duration: 100}}
                 source: "../images/play_button.png"
                 fillMode: Image.PreserveAspectFit
                 MouseArea {
@@ -893,7 +893,7 @@ Rectangle{
                   qsTr('<b>Author : J.Y Priou</b><br>
                   <b>WebSite: <a href="http://www.yoursite.com" title="YouName">YourSite.com</a></b><br>
                   <b>Online Help <a href="http://www.yoursite.com/documentation/en/" title="Online Help">Online Help</a></b><br>
-                  <b>Mail: <a href="mailto:support@yoursite.com">support@yoursite.com</a></b><br>                  <
+                  <b>Mail: <a href="mailto:support@yoursite.com">support@yoursite.com</a></b><br>
                   <br>
                   <b>Fonts from : <a href="http://openfontlibrary.org">openfontlibrary.org</a><b>
                   <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> <br>
@@ -934,7 +934,7 @@ Rectangle{
         color:currentBackGroundColour
         y:0
         ////z:1
-        anchors.right: parent.right        
+        anchors.right: parent.right
         Image {
             id: butmenu
             source: "../images/menu-button_black.png"
@@ -1256,7 +1256,7 @@ Rectangle{
            id:mousecsveditor
            anchors.fill: parent
            onClicked: {
-               //Wait               
+               //Wait
                generalBusy.running=true
                generalBusy.visible=true
 
@@ -1265,7 +1265,7 @@ Rectangle{
                    csveditor.color=currentBackGroundColour
                    //root.inputFake.focus=true
                    PlTools.modalMode("disabled")
-                   if(csvedit.editcsv.hasBeenModified){                       
+                   if(csvedit.editcsv.hasBeenModified){
 //                       csvedit.editcsv.copyLocalToWork()
 //                       csvedit.editcsv.saveDone=true
 
@@ -1279,7 +1279,7 @@ Rectangle{
                else {
                    csveditor.color="green"
                    messageDialog.visible=false
-                   PlTools.modalMode("enabled")                   
+                   PlTools.modalMode("enabled")
                    csveditor.enabled=true
                    csvedit.editcsv.copyWorkToLocal()
                }
@@ -1513,7 +1513,7 @@ Rectangle{
        MouseArea {
            id: mouselyricsEdit
            anchors.fill: parent
-           onClicked: {               
+           onClicked: {
                lyricsEdition=!lyricsEdition
                if(lyricsEdition){
                    PlTools.modalMode("enabled")
@@ -1658,7 +1658,7 @@ Rectangle{
        border.width: 1
        radius: root.hwratio > 1 ? root.hunit/5 : root.vunit / 5
        anchors.right : fontsizeMore.left
-       anchors.rightMargin: root.hwratio < 1 ? root.hunit*0.4: root.vunit*0.4       
+       anchors.rightMargin: root.hwratio < 1 ? root.hunit*0.4: root.vunit*0.4
 
        Image  {
            id: fontsizedefImage
@@ -1704,7 +1704,7 @@ Rectangle{
        border.width: 1
        radius: root.hwratio > 1 ? root.hunit/5 : root.vunit / 5
        anchors.right : root.right
-       anchors.rightMargin: root.hwratio < 1 ? root.hunit*0.4: root.vunit*0.4       
+       anchors.rightMargin: root.hwratio < 1 ? root.hunit*0.4: root.vunit*0.4
 
        Image  {
            id: fontsizeMoreImage
@@ -1813,8 +1813,8 @@ Rectangle{
             id:inappRemoteMouse
             anchors.fill: parent
             enabled: true
-            onClicked: {                
-                if(inappByer.visible){                    
+            onClicked: {
+                if(inappByer.visible){
                     inappRemote.color=currentBackGroundColour
                     PlTools.modalMode("disabled")
                 }
@@ -1967,8 +1967,8 @@ Rectangle{
         id:chordsDisplay
         visible: false
         width: Screen.desktopAvailableWidth
-        height: Screen.desktopAvailableHeight        
-        anchors.centerIn: root        
+        height: Screen.desktopAvailableHeight
+        anchors.centerIn: root
         radius: root.hwratio < 1 ? root.hunit/30 : root.vunit / 30
         color:"white"
         Component.onCompleted: {
@@ -1977,7 +1977,7 @@ Rectangle{
         Flickable {
             id:flickContenair
             anchors.fill: parent
-            contentWidth:Screen.desktopAvailableWidth*.9            
+            contentWidth:Screen.desktopAvailableWidth*.9
             contentHeight:imageChordsDisplay.height
             property real swipeY: 0
             flickableDirection: Flickable.VerticalFlick
@@ -2112,7 +2112,7 @@ Rectangle{
                 width: parent.width
                 height: parent.height
                 hoverEnabled: true
-                onClicked: {                    
+                onClicked: {
                     switch(messageDialog.action){
                         case 0 :
                             // Do nothing
@@ -2146,7 +2146,7 @@ Rectangle{
                         case 2 :
                             // Erase files in current list
                             busyActivity.running=true
-                            cancelbutMessDialog.enabled=false                            
+                            cancelbutMessDialog.enabled=false
                             var index
                             for	(index = 0; index < listTune.length; index++) {
                                 //console.log(root.listTune[index]["audioFile"],"==",root.listTune[index]["lyricsFile"],"==",root.listTune[index]["chordsFile"])
@@ -2188,13 +2188,13 @@ Rectangle{
                         case 5 :
                             // edit csv file name to save in
                             csvedit.editcsv.copyLocalToWork()
-                            csvedit.editcsv.saveDone=true                            
+                            csvedit.editcsv.saveDone=true
                             PlTools.reloadListTune()
 
                             messageDialog.action=0
                             messageDialog.buttonOK=false
                             messageDialog.visible=false
-                            csvFileName.visible=false                                                
+                            csvFileName.visible=false
                             fileService.saveCsvFile(setlistDir+csvFileNameEditor.text,listTune)
                             PlTools.switchPlayLIst()
                             break;
@@ -2242,7 +2242,7 @@ Rectangle{
                     anchors.fill: parent
                     opacity: mouseokbutMessDialog.pressed ? 1 : 0
                     Behavior on opacity { NumberAnimation{ duration: 100 }}
-                    gradient: Gradient {                        
+                    gradient: Gradient {
                         GradientStop { position: 0 ; color: "#22000000" }
                         GradientStop { position: 0.2 ; color: "#44000000" }
                     }
@@ -2384,7 +2384,7 @@ Rectangle{
             width:  root.hwratio < 1 ? root.vunit*1.5  : root.hunit*1.5 //root.hunit
             height: root.hwratio < 1 ? root.vunit  : root.hunit //root.vunit
             color: "gray"
-            border.width: 0.5            
+            border.width: 0.5
             radius: root.hwratio > 1 ? root.hunit/5 : root.vunit / 5
             Text{
                 text:qsTr("Choose")
@@ -2405,7 +2405,7 @@ Rectangle{
                     hoverEnabled: true
                     onClicked: {
                         var listTune
-                        //console.log('>>>>>',listChooser.currentText)                        
+                        //console.log('>>>>>',listChooser.currentText)
                         currentPlaylist=listChooser.currentText
                         root.listTune=fileService.loadPlaylist(listChooser.currentText)
                         playlistName.text=listChooser.currentText
@@ -2542,7 +2542,7 @@ Rectangle{
                 radius: root.hwratio > 1 ? root.hunit/5 : root.vunit / 5
 
                 Text{
-                    text:"Sync."                    
+                    text:"Sync."
                     font.family: scriptFont.name
                     font.pointSize: PlTools.setPointSize(0.25)
                     font.bold: true
@@ -2558,7 +2558,7 @@ Rectangle{
                         height: parent.height
                         hoverEnabled: true
                         onClicked: {
-                            okbutDropbox.hasbbeenPressed=true                            
+                            okbutDropbox.hasbbeenPressed=true
                             dropBoxOperations.synchronyze()
                         }
                         Rectangle {
@@ -2578,7 +2578,7 @@ Rectangle{
               Download Animation
             *********************************/
             BusyIndicator{
-                id:downloadDropboxAnim                
+                id:downloadDropboxAnim
                 height: root.hwratio < 1 ? root.vunit  : root.hunit //root.vunit
                 anchors.right: cancelbutDropbox.left
                 anchors.left: okbutDropbox.right
@@ -2626,8 +2626,8 @@ Rectangle{
                         width: parent.width
                         height: parent.height
                         hoverEnabled: true
-                        onClicked: {                            
-                            dropboxContainer.visible=false                            
+                        onClicked: {
+                            dropboxContainer.visible=false
                             dropboxFile.wY=0
                             dropboxFile.y=0
                             if(okbutDropbox.hasbbeenPressed) {
@@ -2755,5 +2755,5 @@ Rectangle{
 //            height:10
 //            width:10
 //        }
-    }    
+    }
 }
