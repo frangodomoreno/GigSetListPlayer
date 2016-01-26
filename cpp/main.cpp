@@ -1,25 +1,3 @@
-/***********************************************************************************
-# Gig Setlist Player
-#
-# Application Android et iOS pour les musiciens, permettant de créer des setlist de concerts.
-#
-# Copyright (C) 2015  J-Y Priou MonasysInfo
-#
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-***********************************************************************************/
-
 #include <QDir>
 #include <QGuiApplication>
 #include <QQmlEngine>
@@ -42,6 +20,7 @@
 
 #ifdef IOS
 #include "pdfvisu.h"
+#include "backupattrib.h"
 #endif
 
 #ifdef ANDROID
@@ -53,6 +32,8 @@
 #endif // QT_WEBVIEW_WEBENGINE_BACKEND
 
 #include "dropboxoperations.h"
+
+bool setFileAttribute(QString filename);
 
 int main(int argc, char* argv[])
 {
@@ -72,9 +53,9 @@ int main(int argc, char* argv[])
     //Translation
     QTranslator translator;
     QDropbox dropbox(APP_KEY, APP_SECRET);
-
     DropBoxOperations dropboxOperations;
     dropboxOperations.setDropboxObject(&dropbox);
+
 
 #ifdef IOS
     qmlRegisterType<PDFVisu>("PDFVisu", 1, 0, "PDFVisu");
@@ -118,17 +99,36 @@ int main(int argc, char* argv[])
         QDir(documents + "/playlists").mkdir("audio");
         QDir(documents + "/playlists").mkdir("chords");
         QDir(documents + "/playlists").mkdir("lyrics");
-        QFile::copy(":/playlists/mysetlist.csv",documents + "/playlists/example.csv") ;        
-        QFile::setPermissions(documents + "/playlists/example.csv",QFileDevice::WriteOwner|QFileDevice::ReadOwner);
-
-        QFile::copy(":/playlists/audio/onemore.mp3",documents + "/playlists/audio/onemore.mp3") ;
+        QFile::copy(":/playlists/mysetlist.csv",documents + "/playlists/example.csv") ;
+        QFile::copy(":/playlists/audio/onemore.mp3",documents + "/playlists/audio/onemore.mp3") ;        
         QFile::copy(":/playlists/lyrics/onemore.txt",documents + "/playlists/lyrics/onemore.txt") ;
         QFile::copy(":/playlists/lyrics/mysong.txt",documents + "/playlists/lyrics/mysong.txt") ;
         QFile::copy(":/playlists/chords/onemore.png", documents + "/playlists/chords/onemore.png") ;
-        QFile::copy(":/audio/01.mp3", documents + "/playlists/audio/01.mp3") ;
-        QFile::copy(":/audio/02.mp3", documents + "/playlists/audio/02.mp3") ;
-        QFile::copy(":/audio/03.mp3", documents + "/playlists/audio/03.mp3") ;
-        QFile::copy(":/audio/04.mp3", documents + "/playlists/audio/04.mp3") ;
+
+        setFileAttribute(documents + "/playlists/example.csv");
+        setFileAttribute(documents + "/playlists/audio/onemore.mp3");
+        setFileAttribute(documents + "/playlists/lyrics/onemore.txt");
+        setFileAttribute(documents + "/playlists/lyrics/mysong.txt");
+        setFileAttribute(documents + "/playlists/chords/onemore.png");
+
+#ifdef IOS
+        // 20160124 Rend ces fichiers non sauvegardable sur iCloud
+        backupAttrib bckAtt;
+        bool statAttrib;
+
+        setFileAttribute(documents + "/playlists/example.csv");
+        setFileAttribute(documents + "/playlists/audio/onemore.mp3");
+        setFileAttribute(documents + "/playlists/lyrics/onemore.txt");
+        setFileAttribute(documents + "/playlists/lyrics/mysong.txt");
+        setFileAttribute(documents + "/playlists/chords/onemore.png");
+
+        statAttrib = bckAtt.setAttribExclude(documents + "/playlists/example.csv");
+        statAttrib = bckAtt.setAttribExclude(documents + "/playlists/audio/onemore.mp3");
+        statAttrib = bckAtt.setAttribExclude(documents + "/playlists/lyrics/onemore.txt");
+        statAttrib = bckAtt.setAttribExclude(documents + "/playlists/lyrics/mysong.txt");
+        statAttrib = bckAtt.setAttribExclude(documents + "/playlists/chords/onemore.png");
+#endif
+
         firstLaunch=true;
     }
 
@@ -152,13 +152,14 @@ int main(int argc, char* argv[])
     view.rootContext()->setContextProperty("screenH",screenH);
     view.rootContext()->setContextProperty("screenW",screenW);
     view.rootContext()->setContextProperty("liteMode",LiteMode);
+
     //20150723 Ajout de la property setlistDir
     view.rootContext()->setContextProperty("setlistDir",documents + "/playlists/");
 
     view.rootContext()->setContextProperty("dropBoxOperations",&dropboxOperations);
     view.rootContext()->setContextProperty("android",false);
-
     view.setSource(QUrl("qrc:/qml/main.qml"));
+
 
     view.setResizeMode(QQuickView::SizeRootObjectToView);
 
@@ -172,4 +173,8 @@ int main(int argc, char* argv[])
     QMetaObject::invokeMethod(qmlRoot, "main");
 
     return app.exec();
+}
+
+bool setFileAttribute(QString filename){
+    return QFile::setPermissions(filename,QFileDevice::WriteOwner|QFileDevice::ReadOwner);
 }

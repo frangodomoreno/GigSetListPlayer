@@ -1,27 +1,9 @@
-/***********************************************************************************
-# Gig Setlist Player
-#
-# Application Android et iOS pour les musiciens, permettant de créer des setlist de concerts.
-#
-# Copyright (C) 2015  J-Y Priou MonasysInfo
-#
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-***********************************************************************************/
-
-/********************************
+     /********************************
   TODOLIST
+    Windows :
+        TODO: Test 32/64 bits
+        TODO: portage WinRt
+        TODO: Icône Application
 
     Android:
         --> Ok Creer dossier Documents si inexistant (A voir, ne semble pas fonctionner)
@@ -56,6 +38,8 @@
         TODOOK: - 20151202 : Voir pourquoi si le fichier texte est un pdf et que c'est le premier, play ne fonctionne pas
                            Voir pourquoi après un pdf, un morceau sans texte affiche encore le même pdf.
                            Si temps du morceau est 0 considérer que c'est 3:30 mn
+
+        TODO: - 20160123 : Rendre les fichiers exemples (mp3, txt ...) non copiable sur iCloud
 
         TODO: - 20150812 : Ajouter un décompte pour les morceau sans bandes son (BPM et Signature dans la colonne divers à la mode Live) ENCORE DU BOULOT LADSUS
         TODO: - 20150807 : Si le texte est déja au format html, ne pas ajouter la, balise <pre> et voir comment réagis l'automatisation
@@ -907,9 +891,9 @@ Rectangle{
             wrapMode:Text.Wrap
             text:'<b>Version : ' + currentVersion + '<b><br>' +
                   qsTr('<b>Author : J.Y Priou</b><br>
-                  <b>WebSite: <a href="http://www.monasysinfo.com" title="MonasysInfo">Monasysinfo.com</a></b><br>
-                  <b>Online Help <a href="http://www.monasysinfo.com/documentation/en/" title="Online Help">Online Help</a></b><br>
-                  <b>Mail: <a href="mailto:support@monasysinfo.com">support@monasysinfo.com</a></b><br>                  <
+                  <b>WebSite: <a href="http://www.yoursite.com" title="YouName">YourSite.com</a></b><br>
+                  <b>Online Help <a href="http://www.yoursite.com/documentation/en/" title="Online Help">Online Help</a></b><br>
+                  <b>Mail: <a href="mailto:support@yoursite.com">support@yoursite.com</a></b><br>                  <
                   <br>
                   <b>Fonts from : <a href="http://openfontlibrary.org">openfontlibrary.org</a><b>
                   <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> <br>
@@ -1855,29 +1839,74 @@ Rectangle{
         }
     }
 
+//    /****************************************
+//      Automation indicators
+//    *****************************************/
+//    Text {
+//        id: automationIndicator
+//        y:0
+//        anchors.right: remoteActivatio.left
+//        visible:true
+//        text: {
+//            if(root.automationFlag)
+//               qsTr("Scroll automation")
+//            else
+//                if(root.automationRecord)
+//                    qsTr("Scroll Recording")
+//                else
+//                    ""
+//        }
+//        color:root.automationRecord?"red":"white"
+//        font.family: currentListFont
+//        font.bold: true
+//        font.pointSize: PlTools.setPointSize(0.20)
+//        anchors.top: root.top
+//        anchors.topMargin: root.hwratio < 1 ? root.hunit*0.4: root.vunit*0.4
+//    }
+
     /****************************************
-      Automation indicators
+      Automation indicator
     *****************************************/
-    Text {
-        id: automationIndicator
+    Rectangle{
+        id:automationIndicator
+        width : root.hwratio < 1 ? root.hunit*0.8: root.vunit*0.8
+        height: root.hwratio < 1 ? root.hunit*0.5: root.vunit*0.5
+        color:root.automationRecord?"red":"lightgreen" //currentBackGroundColour
         y:0
         anchors.right: remoteActivatio.left
-        visible:true
-        text: {
-            if(root.automationFlag)
-               qsTr("Scroll automation")
-            else
-                if(root.automationRecord)
-                    qsTr("Scroll Recording")
-                else
-                    ""
+        visible:root.automationRecord||root.automationFlag
+        radius: root.hwratio > 1 ? root.hunit/5 : root.vunit / 5
+        anchors.rightMargin: root.hwratio < 1 ? root.hunit*0.1: root.vunit*0.1
+        anchors.topMargin: root.hwratio < 1 ? root.hunit*0.2: root.vunit*0.2
+        anchors.top:root.top
+
+        Image  {
+            id:automationIndicatorImage
+            anchors.fill: parent
+            source: "../images/settings85.png"
+            fillMode: Image.PreserveAspectFit
         }
-        color:root.automationRecord?"red":"white"
-        font.family: currentListFont
-        font.bold: true
-        font.pointSize: PlTools.setPointSize(0.20)
-        anchors.top: root.top
-        anchors.topMargin: root.hwratio < 1 ? root.hunit*0.4: root.vunit*0.4
+    }
+
+    BusyIndicator{
+        id:automationIndicatorBusy
+        height: automationIndicator.height
+        width: automationIndicator.width
+        anchors.centerIn: automationIndicator
+        anchors.bottom: automationIndicator.bottom
+        running:root.automationRecord
+        style: BusyIndicatorStyle {
+            indicator: Image {
+                visible: control.running
+                source: "../images/loading13.png"
+                RotationAnimator on rotation {
+                    running: control.running
+                    loops: Animation.Infinite
+                    duration: 2000
+                    from: 0 ; to: 360
+                }
+            }
+        }
     }
 
     /*******************************
@@ -1914,6 +1943,18 @@ Rectangle{
         anchors.centerIn: playerIndicator
         anchors.bottom: parent.bottom
         running:playerIndicator.visible
+        style: BusyIndicatorStyle {
+            indicator: Image {
+                visible: control.running
+                source: "../images/loading13.png"
+                RotationAnimator on rotation {
+                    running: control.running
+                    loops: Animation.Infinite
+                    duration: 2000
+                    from: 0 ; to: 360
+                }
+            }
+       }
     }
 
 

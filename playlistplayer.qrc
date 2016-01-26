@@ -63,5 +63,7 @@
         <file>qml/FirstLaunch.qml</file>
         <file>qml/PdfViewCreate.qml</file>
         <file>qml/AndPdfViewer.qml</file>
+        <file>images/settings85.png</file>
+        <file>images/loading13.png</file>
     </qresource>
 </RCC>
