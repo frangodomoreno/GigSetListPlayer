@@ -1,76 +1,25 @@
-     /********************************
-  TODOLIST
-    Windows :
-        TODO: Test 32/64 bits
-        TODO: portage WinRt
-        TODO: Icône Application
+/***********************************************************************************
+# Gig Setlist Player
+#
+# Application Android et iOS pour les musiciens, permettant de créer des setlist de concerts.
+#
+# Copyright (C) 2015  J-Y Priou MonasysInfo
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+***********************************************************************************/
 
-    Android:
-        --> Ok Creer dossier Documents si inexistant (A voir, ne semble pas fonctionner)
-        --> Ok Synchro Dropbox OK
-
-    iOS:
-        Volume slider à intégrer en Objective C
-        --> OK Splash Screen
-
-    MacOsx:
-        --> Ok Icône Application
-
-    Fonctionnel :
-        ---> OK  20150726 : Quand le mode edition csv est actif, faire disable Liste et disable Tool Button.
-        ---> OK  20150726 : Lors du choix de la liste, disable All button et Liste.
-
-        TODOOK: - 20150812 : Ajouter un sablier lors du chargement de l'editeur CSV
-        TODOOK: - 20150812 : Synchro Ipad / Dropbox
-        TODOOK: - 20150814 : Dans la sauvegard des fichier (txt et csv) ajouter une procédure de mise à jour du fichier hashVersionTab.dat poue la synchro dropbox
-        TODOOK: - 20150821 : Si mode pedalier autorisé, prevoir un mode scroll et une mode page.
-        TODOOK: - 20150827 : Revoir le séquencement (pop up de switch de list intempestif mal placé) lorsqu'on supprime une liste
-        TODOOK: - 20150902 : Menu tool ajouter mode par défaut : scroll/page
-        TODOOK: - 20150827 : Dans l'edition CSV, revoir l'affichage quand on sauvegarde dans une autre liste que la liste courante, (utiliser un 3eme buffer ?)
-        TODOOK: - 20150726 : Lors de l'activation du mode edition csv,supprimer la selection active si il y en a une.
-        TODOOK: - 20150917 : Embarquer le scrollVariation dans les données d'automation
-        TODOOK: - 20150827 : Revoir Menu tools
-        TODOOK: - 20150917 : Etude du scrolling d'un png (jpeg) dans l'écran chordsDisplay
-
-        TODOOK: - 20151028 : Regénérer les messages en français
-
-
-        TODOOK: - 20151202 : Voir pourquoi si le fichier texte est un pdf et que c'est le premier, play ne fonctionne pas
-                           Voir pourquoi après un pdf, un morceau sans texte affiche encore le même pdf.
-                           Si temps du morceau est 0 considérer que c'est 3:30 mn
-
-        TODO: - 20160123 : Rendre les fichiers exemples (mp3, txt ...) non copiable sur iCloud
-
-        TODO: - 20150812 : Ajouter un décompte pour les morceau sans bandes son (BPM et Signature dans la colonne divers à la mode Live) ENCORE DU BOULOT LADSUS
-        TODO: - 20150807 : Si le texte est déja au format html, ne pas ajouter la, balise <pre> et voir comment réagis l'automatisation
-        TODO: - 20150813 : Tap Tempo pour les morceaux sans bande son (soit manuel, soit vocal)
-
-        Implementation d'un menu Tools avec :
-        --> Ok    -Suppression de la liste en cours (fichier csv) avec choix de supprimer tous
-                les fichiers référencés dedans (mp3, txt, pgn).
-        --> Ok    -Supression de tous les fichiers mp3, txt ..
-        --> Ok    -Modification police et couleur police.
-        --> Ok    -Modification couleur de fond
-
-        --> Ok Multi Language
-        --> OK Tester cycle complet avec dossier dropbox inndexistant
-        --> Ok via acces web Help à voir
-        --> OK Icône mode lecture audio a animer et mode lecture lyrics
-        --> OK Revoir l'affichage de la synchro DropBox
-        --> OK Revoir Calcul increment defilement
-        --> OK Voir la synchro DropBox deux foix de suite qui ne fonctionne pas
-
-    BUGS:
-        --> OK Problème de repositionnement dans le texte lors du passage d'un texte à un autre
-               si le texte de dépaart n'est pas positionné tout en hat (position 0)
-
-    Autre:
-
-    Icons from : https://www.iconfinder.com
-    Fonts from : http://openfontlibrary.org/
-    Icon made by Freepik at http://www.freepik.com from http://www.flaticon.com is licensed under Creative Commons BY 3.0
-
-*********************************/
 
 import QtQuick 2.4
 import QtGraphicalEffects 1.0
